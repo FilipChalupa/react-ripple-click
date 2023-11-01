@@ -1,0 +1,35 @@
+@keyframes ripple {
+	0% {
+		transform: scale(0);
+		opacity: var(--Ripple-opacity);
+	}
+	30% {
+		opacity: var(--Ripple-opacity);
+	}
+	70% {
+		transform: none;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.wrapper {
+	display: contents;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.ripple {
+		--Ripple-opacity: 0.2;
+		position: absolute;
+		z-index: -1;
+		top: calc(-0.5 * var(--Ripple-size) + var(--Ripple-y));
+		left: calc(-0.5 * var(--Ripple-size) + var(--Ripple-x));
+		width: var(--Ripple-size);
+		aspect-ratio: 1 / 1;
+		border-radius: 50%;
+		background-color: currentColor;
+		animation: ripple 0.6s forwards ease-in;
+		pointer-events: none;
+	}
+}
