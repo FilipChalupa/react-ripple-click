@@ -1,6 +1,6 @@
 {
 	"name": "react-ripple-click",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Ripple effect for your buttons.",
 	"type": "module",
 	"main": "./dist/index.cjs",
