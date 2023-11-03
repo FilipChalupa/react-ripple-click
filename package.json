@@ -3,8 +3,8 @@
 	"version": "0.1.1",
 	"description": "Ripple effect for your buttons.",
 	"type": "module",
-	"main": "./dist/index.js",
-	"module": "./dist/index.es.js",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"scripts": {
 		"start": "rollup -c -w",
