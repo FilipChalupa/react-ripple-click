@@ -69,6 +69,10 @@ export const Ripple: FunctionComponent<RippleProps> = ({}) => {
 		}
 	}, [handlePointerDown])
 
+	const discardRipple = useCallback(() => {
+		setRipple(null)
+	}, [])
+
 	return (
 		<span ref={ref} className={styles.wrapper}>
 			{ripple && (
@@ -82,6 +86,7 @@ export const Ripple: FunctionComponent<RippleProps> = ({}) => {
 							'--Ripple-y': `${ripple.y}px`,
 						} as CSSProperties
 					}
+					onAnimationEnd={discardRipple}
 				/>
 			)}
 		</span>
