@@ -4,26 +4,23 @@ import path from 'path'
 import del from 'rollup-plugin-delete'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
+import preserveDirectives from 'rollup-plugin-preserve-directives'
 import typescript from 'rollup-plugin-typescript2'
 import packageJson from './package.json' assert { type: 'json' }
 
+const outputDirectory = path.parse(packageJson.main).dir
+
 export default {
 	input: './src/index.ts',
-	output: [
-		{
-			file: packageJson.main,
-			format: 'cjs',
-			sourcemap: true,
-		},
-		{
-			file: packageJson.module,
-			format: 'esm',
-			sourcemap: true,
-		},
-	],
+	output: {
+		dir: outputDirectory,
+		format: 'esm',
+		sourcemap: true,
+		preserveModules: true,
+	},
 	external: ['react'],
 	plugins: [
-		del({ targets: path.parse(packageJson.main).dir + '/*' }),
+		del({ targets: outputDirectory + '/*' }),
 		peerDepsExternal(),
 		postcss({
 			extract: true,
@@ -32,5 +29,6 @@ export default {
 		resolve(),
 		commonjs(),
 		typescript(),
+		preserveDirectives(),
 	],
 }
