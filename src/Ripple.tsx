@@ -1,12 +1,12 @@
 'use client'
 
 import {
-	CSSProperties,
-	FunctionComponent,
 	useCallback,
 	useEffect,
 	useRef,
 	useState,
+	type CSSProperties,
+	type FunctionComponent,
 } from 'react'
 import styles from './Ripple.module.css'
 
@@ -14,13 +14,15 @@ export type RippleProps = Record<string, never>
 
 const interactiveElementSelector = 'a, button' as const
 
-export const Ripple: FunctionComponent<RippleProps> = ({}) => {
-	const [ripple, setRipple] = useState<null | {
-		id: number
-		size: number
-		x: number
-		y: number
-	}>(null)
+export const Ripple: FunctionComponent<RippleProps> = () => {
+	const [ripples, setRipples] = useState<
+		Array<{
+			id: number
+			size: number
+			x: number
+			y: number
+		}>
+	>([])
 	const ref = useRef<HTMLSpanElement>(null)
 	const handlePointerDown = useCallback((event: PointerEvent) => {
 		const rippleElement = ref.current
@@ -56,12 +58,15 @@ export const Ripple: FunctionComponent<RippleProps> = ({}) => {
 			2 * Math.sqrt(Math.pow(rect.width, 2) + Math.pow(rect.height, 2))
 		const x = event.clientX - rect.left
 		const y = event.clientY - rect.top
-		setRipple({
-			id: event.timeStamp,
-			size,
-			x,
-			y,
-		})
+		setRipples((ripples) => [
+			...ripples,
+			{
+				id: event.timeStamp,
+				size,
+				x,
+				y,
+			},
+		])
 	}, [])
 
 	useEffect(() => {
@@ -71,13 +76,13 @@ export const Ripple: FunctionComponent<RippleProps> = ({}) => {
 		}
 	}, [handlePointerDown])
 
-	const discardRipple = useCallback(() => {
-		setRipple(null)
+	const discardRipple = useCallback((rippleId: number) => {
+		setRipples((ripples) => ripples.filter((ripple) => ripple.id !== rippleId))
 	}, [])
 
 	return (
 		<span ref={ref} className={styles.wrapper}>
-			{ripple && (
+			{ripples.map((ripple) => (
 				<span
 					className={styles.ripple}
 					key={ripple.id}
@@ -88,9 +93,11 @@ export const Ripple: FunctionComponent<RippleProps> = ({}) => {
 							'--Ripple-y': `${ripple.y}px`,
 						} as CSSProperties
 					}
-					onAnimationEnd={discardRipple}
+					onAnimationEnd={() => {
+						discardRipple(ripple.id)
+					}}
 				/>
-			)}
+			))}
 		</span>
 	)
 }
