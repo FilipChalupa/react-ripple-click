@@ -1,54 +1,59 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { FunctionComponent, PropsWithChildren } from 'react'
 import { Ripple } from './Ripple'
 import './Ripple.stories.css'
 
-const Button: FunctionComponent<
-	PropsWithChildren<{ className?: string; disabled?: boolean }>
-> = ({ children, className = 'button--basic', disabled, ...props }) => {
-	return (
-		<button className={className} disabled={disabled}>
-			<Ripple {...props} />
-			{children}
-		</button>
-	)
-}
-
 const meta = {
 	title: 'Ripple',
-	component: Button,
+	component: Ripple,
 	tags: ['autodocs'],
 	parameters: {
 		layout: 'centered',
 	},
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof Ripple>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Plain: Story = {
-	args: {
-		children: 'Click me',
-	},
+	decorators: [
+		(Story) => (
+			<button className="button--basic">
+				<Story />
+				Click me
+			</button>
+		),
+	],
 }
 
 export const Disabled: Story = {
-	args: {
-		children: 'Disabled',
-		disabled: true,
-	},
+	decorators: [
+		(Story) => (
+			<button className="button--basic" disabled>
+				<Story />
+				Disabled
+			</button>
+		),
+	],
 }
 
 export const Purple: Story = {
-	args: {
-		children: 'Purple',
-		className: 'button--purple',
-	},
+	decorators: [
+		(Story) => (
+			<button className="button--purple">
+				<Story />
+				Purple
+			</button>
+		),
+	],
 }
 
 export const Blue: Story = {
-	args: {
-		children: 'Blue',
-		className: 'button--blue',
-	},
+	decorators: [
+		(Story) => (
+			<button className="button--blue">
+				<Story />
+				Blue
+			</button>
+		),
+	],
 }
