@@ -19,7 +19,10 @@
 }
 
 .ripple {
-	--Ripple-opacity: 0.2;
+	--Ripple-opacity: var(--Ripple-custom-opacity, 0.2);
+	--Ripple-duration: var(--Ripple-custom-duration, 0.6s);
+	--Ripple-timing-function: var(--Ripple-custom-timing-function, ease-in);
+	--Ripple-color: var(--Ripple-custom-color, currentColor);
 	position: absolute;
 	z-index: -1;
 	top: calc(-0.5 * var(--Ripple-size) + var(--Ripple-y));
@@ -27,8 +30,9 @@
 	width: var(--Ripple-size);
 	aspect-ratio: 1 / 1;
 	border-radius: 50%;
-	background-color: currentColor;
-	animation: ripple 0.6s forwards ease-in;
+	background-color: var(--Ripple-color);
+	animation: ripple var(--Ripple-duration) forwards
+		var(--Ripple-timing-function);
 	pointer-events: none;
 }
 

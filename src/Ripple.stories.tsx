@@ -57,3 +57,35 @@ export const Blue: Story = {
 		),
 	],
 }
+
+export const CustomRedOverride: Story = {
+	decorators: [
+		(Story) => (
+			<button className="button--custom">
+				<Story />
+				Red
+			</button>
+		),
+		(Story) => (
+			<div className="theme--red">
+				<Story />
+			</div>
+		),
+	],
+}
+
+export const CustomGreenOverride: Story = {
+	decorators: [
+		(Story) => (
+			<button className="button--custom">
+				<Story />
+				Green
+			</button>
+		),
+		(Story) => (
+			<div className="theme--green">
+				<Story />
+			</div>
+		),
+	],
+}

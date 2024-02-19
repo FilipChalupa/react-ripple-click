@@ -31,3 +31,16 @@ const App = () => {
 	)
 }
 ```
+
+### Custom overrides
+
+Put to any parent element the following CSS custom properties to override the default ripple effect:
+
+```css
+:root {
+	--Ripple-custom-opacity: 0.2;
+	--Ripple-custom-duration: 0.6s;
+	--Ripple-custom-timing-function: ease-in;
+	--Ripple-custom-color: currentColor;
+}
+```

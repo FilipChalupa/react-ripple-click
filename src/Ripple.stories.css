@@ -1,6 +1,7 @@
 .button--basic,
 .button--purple,
-.button--blue {
+.button--blue,
+.button--custom {
 	font-size: 3rem;
 	position: relative;
 	overflow: hidden;
@@ -23,4 +24,30 @@
 	background-color: #000070;
 	border-color: #000070;
 	border-style: solid;
+}
+
+.theme--light,
+.theme--dark {
+	padding: 2em;
+}
+
+.button--custom {
+	border: 1px solid;
+	background-color: transparent;
+	border-radius: 0.2em;
+	padding: 0.2em 0.5em;
+	box-shadow: 0 0 0.2em var(--Ripple-custom-color);
+
+	/* Overrides */
+	--Ripple-custom-opacity: 0.7;
+	--Ripple-custom-duration: 2s;
+	--Ripple-custom-timing-function: ease-out;
+}
+
+.theme--red {
+	--Ripple-custom-color: red;
+}
+
+.theme--green {
+	--Ripple-custom-color: green;
 }
