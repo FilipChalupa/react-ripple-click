@@ -10,21 +10,11 @@ import {
 } from 'react'
 import styles from './Ripple.module.css'
 
+export type RippleProps = Record<string, never>
+
 const interactiveElementSelector = 'a, button' as const
 
-type RipplesStyleProps = {
-	rippleOpacity?: number
-	transition?: string
-	rippleSpeed?: string
-	rippleColor?: string
-}
-
-export const Ripple: FunctionComponent<RipplesStyleProps> = ({
-	rippleOpacity = 0.2,
-	transition = 'ease in',
-	rippleSpeed = '0.6s',
-	rippleColor = 'currentcolor',
-}) => {
+export const Ripple: FunctionComponent<RippleProps> = () => {
 	const [ripples, setRipples] = useState<
 		Array<{
 			id: number
@@ -98,10 +88,6 @@ export const Ripple: FunctionComponent<RipplesStyleProps> = ({
 					key={ripple.id}
 					style={
 						{
-							'--Ripple-opacity': rippleOpacity,
-							animationDuration: rippleSpeed,
-							animationTimingFunction: transition,
-							backgroundColor: rippleColor,
 							'--Ripple-size': `${ripple.size}px`,
 							'--Ripple-x': `${ripple.x}px`,
 							'--Ripple-y': `${ripple.y}px`,
