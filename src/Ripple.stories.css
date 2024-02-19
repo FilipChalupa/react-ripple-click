@@ -1,0 +1,26 @@
+.button--basic,
+.button--purple,
+.button--blue {
+	font-size: 3rem;
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+
+	&:not(:disabled) {
+		cursor: pointer;
+	}
+}
+
+.button--purple {
+	color: white;
+	background-color: #4b004b;
+	border-color: #4b004b;
+	border-style: solid;
+}
+
+.button--blue {
+	color: white;
+	background-color: #000070;
+	border-color: #000070;
+	border-style: solid;
+}
